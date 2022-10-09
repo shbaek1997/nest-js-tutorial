@@ -1,10 +1,15 @@
-import { Controller, Delete, Get, Post, Param, Patch } from '@nestjs/common';
+import { Controller, Delete, Get, Post, Param, Patch, Body, Query } from '@nestjs/common';
 
 @Controller('movies') //'movies'가 entry point를 설정함, controller 안의 string이 router route임.
 export class MoviesController {
   @Get()
   getAll(): string {
     return 'This returns all movies';
+  }
+
+  @Get('/search')
+  search(@Query('year') searchYear){
+    return `searching for a movie in year: ${searchYear}`;
   }
 
   @Get('/:id')
@@ -15,8 +20,9 @@ export class MoviesController {
   }
 
   @Post()
-  create(){
-    return 'this will create a movie';
+  create(@Body() movieData){
+    console.log(movieData);
+    return movieData;
   }
 
   @Delete('/:id')
@@ -25,8 +31,12 @@ export class MoviesController {
   }
 
   @Patch('/:id')
-  patch(@Param('id') id:string){
-    return `this will update a movie with the id: ${id}`
+  patch(@Param('id') id: string, @Body() updateData) {
+    return {
+      movieId: id,
+      ...updateData
+    }
+
   }
 
 }

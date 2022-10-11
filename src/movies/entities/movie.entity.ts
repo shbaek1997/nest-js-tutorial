@@ -1,5 +1,5 @@
 export class Movie {
-  id: string;
+  id: number;
   title: string;
   year: number;
   genres: string[];

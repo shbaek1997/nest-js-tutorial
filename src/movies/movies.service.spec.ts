@@ -4,7 +4,7 @@ import { MoviesService } from './movies.service';
 
 describe('MoviesService', () => {
   let service: MoviesService;
-
+  //beforeEach 말고도 afterAll, beforeAll 등 다른 것도 초기화 등에 활용할때 유용하다.
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [MoviesService],
